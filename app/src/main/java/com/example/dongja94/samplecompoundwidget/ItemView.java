@@ -3,14 +3,14 @@ package com.example.dongja94.samplecompoundwidget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
  * Created by dongja94 on 2015-10-05.
  */
-public class ItemView extends FrameLayout {
+public class ItemView extends RelativeLayout {
 
     public ItemView(Context context) {
         super(context);
