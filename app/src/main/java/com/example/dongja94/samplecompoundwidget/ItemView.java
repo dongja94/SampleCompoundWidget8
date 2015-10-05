@@ -2,6 +2,7 @@ package com.example.dongja94.samplecompoundwidget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,10 +26,28 @@ public class ItemView extends FrameLayout {
     TextView titleView, descView;
     ItemData mData;
 
+    public interface OnImageClickListener {
+        public void onImageClick(ItemView view, ItemData data);
+    }
+
+    OnImageClickListener mListener;
+    public void setOnImageClickListener(OnImageClickListener listener) {
+        mListener = listener;
+    }
+
     private void init() {
 //        LayoutInflater.from(getContext()).inflate(R.layout.view_item, this);
         inflate(getContext(), R.layout.view_item, this);
         iconView = (ImageView)findViewById(R.id.image_icon);
+        iconView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onImageClick(ItemView.this, mData);
+                }
+            }
+        });
+
         titleView = (TextView)findViewById(R.id.text_title);
         descView = (TextView)findViewById(R.id.text_desc);
 
@@ -41,6 +60,12 @@ public class ItemView extends FrameLayout {
         }
         titleView.setText(data.title);
         descView.setText(data.desc);
+    }
+
+    public void changeText() {
+        if (mData == null) return;
+        titleView.setText(mData.desc);
+        descView.setText(mData.title);
     }
 
 }

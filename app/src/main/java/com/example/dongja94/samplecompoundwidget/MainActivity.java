@@ -2,6 +2,7 @@ package com.example.dongja94.samplecompoundwidget;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +18,12 @@ public class MainActivity extends AppCompatActivity {
         data.title = "title...";
         data.desc = "desc...";
         myView.setItemData(data);
+        myView.setOnImageClickListener(new ItemView.OnImageClickListener() {
+            @Override
+            public void onImageClick(ItemView view, ItemData data) {
+                Toast.makeText(MainActivity.this, "title : " + data.title, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         my2View = (ItemView)findViewById(R.id.item_my2);
         data = new ItemData();
